@@ -20,29 +20,29 @@ export const DEFAULT_INTERVALS: DonationInterval[] = [
 ];
 
 export interface DonationAmount {
-  amount: string;
+  value: string;
   default?: boolean;
 }
 
 export const DEFAULT_AMOUNTS: DonationAmount[] = [
   {
-    amount: "3",
+    value: "3",
   },
   {
-    amount: "5",
+    value: "5",
   },
   {
-    amount: "10",
+    value: "10",
     default: true,
   },
   {
-    amount: "25",
+    value: "25",
   },
   {
-    amount: "50",
+    value: "50",
   },
   {
-    amount: "100",
+    value: "100",
   },
 ];
 

@@ -28,7 +28,6 @@ export const FormSubmit: FC<FormSubmitProps> = ({
       {...containerProps}
       sx={{
         position: "relative",
-        display: "inline-flex",
         ...containerProps.sx,
       }}
     >
@@ -40,6 +39,7 @@ export const FormSubmit: FC<FormSubmitProps> = ({
           top: "50%",
           zIndex: -1,
           transform: "translate(-50%, -50%)",
+          height: "100%",
           ...spinnerProps.sx,
         }}
       />

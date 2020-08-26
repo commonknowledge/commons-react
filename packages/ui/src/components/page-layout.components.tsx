@@ -56,7 +56,7 @@ export const PageConfig: FC<PageConfigProps> = ({ children }) => {
 
   return (
     <Fragment>
-      <Global styles={theme.fontStack?.join(" ")} />
+      {theme.fontStack && <Global styles={theme.fontStack.join("\n")} />}
       {children}
     </Fragment>
   );
@@ -64,5 +64,6 @@ export const PageConfig: FC<PageConfigProps> = ({ children }) => {
 
 export const StorybookPageConfig: FC = (props) =>
   PageConfig({ ...props, rootId: "storybook" });
+
 export const NextJsPageConfig: FC = (props) =>
   PageConfig({ ...props, rootId: "__next" });

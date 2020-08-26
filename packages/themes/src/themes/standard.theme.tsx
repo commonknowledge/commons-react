@@ -1,21 +1,22 @@
-import { Theme } from "theme-ui";
-import { memoize, times } from "lodash";
+import { merge, times } from "lodash";
+import { toTheme } from "@theme-ui/typography";
+import { CommonTheme } from "../interfaces/ext-theme.interface";
+import {
+  NeueHaasGroteskFontStack,
+  NeueHaasGrotesk,
+} from "../fonts/neue-haas/neue-hass.font";
+import { themeMixins } from "../util/theme.util";
 
-const fib = memoize((x: number): number => (x === 0 ? x : x + fib(x - 1)));
+const typography = {
+  baseFontSize: "18px",
+  baseLineHeight: 1.45,
+  headerFontFamily: [NeueHaasGrotesk, "Helvetica", "Arial", "sans-serif"],
+  bodyFontFamily: [NeueHaasGrotesk, "Helvetica", "Arial", "sans-serif"],
+};
 
-export const StandardTheme: Theme = {
-  fonts: {
-    body: "'IBM Plex Sans', system-ui, sans-serif",
-    heading: "'IBM Plex Sans', system-ui, sans-serif",
-    monospace: "'Space Mono', Menlo, monospace",
-  },
+const theme: CommonTheme = {
+  useBodyStyles: true,
   breakpoints: ["40em", "52em", "72em"],
-  space: times(10, (x) => 2.5 * fib(x)),
-  fontSizes: [8, 10, 14, 15, 18, 24, 32, 38, 54],
-  lineHeights: {
-    body: 1.45,
-    heading: 1.125,
-  },
   colors: {
     text: "#111",
     background: "#F0F0F0",
@@ -24,6 +25,7 @@ export const StandardTheme: Theme = {
     primary: "#111",
     secondary: "#00E8A2",
     accent: "#00E8A2",
+    control: "#666",
   },
   links: {
     default: {
@@ -42,61 +44,100 @@ export const StandardTheme: Theme = {
       },
     },
   },
+  styles: {
+    root: {
+      color: "text",
+      backgroundColor: "background",
+      fontFamily: "body",
+    },
+  },
+  fontStack: [NeueHaasGroteskFontStack],
+};
+
+const components = {
   buttons: {
-    primary: {
-      p: "1em",
+    button: {
+      py: 1,
+      px: 3,
+      cursor: "pointer",
       fontFamily: "body",
       userSelect: "none",
       outline: "none",
       borderRadius: 6,
-      bg: "#767676",
+      bg: "control",
       color: "white",
       width: "100%",
       transition: "opacity 250ms ease-in-out",
-      cursor: "pointer",
-      "body.hasHover &:hover": {
-        opacity: 0.8,
+      "&:hover": {
+        opacity: 0.7,
       },
     },
+    outline: themeMixins([
+      "buttons.button",
+      {
+        textAlign: "center",
+        backgroundColor: "white",
+        borderWidth: 2,
+        borderStyle: "solid",
+        borderColor: "control",
+        color: "text",
+      },
+    ]),
+    primary: themeMixins([
+      "buttons.button",
+      {
+        backgroundColor: "primary",
+      },
+    ]),
+    secondary: themeMixins([
+      "buttons.button",
+      {
+        backgroundColor: "secondary",
+      },
+    ]),
+    toggle: themeMixins(["buttons.outline"]),
+    toggleActive: themeMixins([
+      "buttons.outline",
+      {
+        borderColor: "accent",
+      },
+    ]),
   },
   forms: {
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: ["stretch", "flex-start"],
+    },
+    item: {
+      alignItems: ["stretch", "flex-start"],
+    },
+    fullWidth: {
+      alignSelf: "stretch",
+      alignItems: "stretch",
+    },
     label: {},
     input: {
-      color: "black",
-      p: "1em",
+      color: "control",
+      p: 1,
+      width: "20em",
       borderRadius: 6,
       transition: "border-color 250ms ease-in-out",
       border: "2px solid rgba(0,0,0,0)",
+      borderColor: "control",
       "&:focus": {
         borderColor: "secondary",
         outline: "none",
       },
     },
   },
-  styles: {
-    a: {
-      color: "primary",
-      textDecoration: "none",
-      borderBottom: (theme) => "1px solid " + theme.colors.accent,
-      "body.hasHover &:hover": {
-        color: "accent",
-      },
-    },
-    blockquote: {
-      fontStyle: "italic",
-      ml: 0,
-      pl: 4,
-      color: "#767676",
-      borderLeft: (theme) => "1px solid " + theme.colors.accent,
-    },
-    p: {
-      lineHeight: "body",
-      mb: "0.5em",
-      mt: "0.5em",
-    },
-    h1: {},
-    h2: { fontWeight: 500, mb: 3, "&:not(:first-of-type)": { mt: 5 } },
-    h3: { mt: 4, mb: 2 },
-    h4: {},
-  },
 };
+
+console.log(toTheme(typography));
+
+export const StandardTheme: CommonTheme = merge(
+  {},
+  toTheme(typography),
+  components,
+  theme
+);

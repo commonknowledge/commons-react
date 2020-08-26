@@ -7,20 +7,23 @@ interface ToggleGridProps<T = {}> extends Omit<GridProps, "ref"> {
   options: SelectOption<T>[];
   buttonVariant?: string;
   getKey?: (x: T) => string | number;
+  format?: (opt: SelectOption<T>) => ReactNode;
 }
 
 interface SelectOption<T> {
   value: T;
-  label: ReactNode;
+  label?: ReactNode;
 }
 
 type ToggleGridComponent = <T>(props: ToggleGridProps<T>) => ReactElement;
 
 export const ToggleGrid: ToggleGridComponent = ({
   name,
+  variant = "grid",
   buttonVariant = "toggle",
   getKey = String,
   options,
+  format = (x) => x.label || String(x.value),
   ...props
 }: ToggleGridProps<any>) => {
   console.log({ name });
@@ -34,19 +37,21 @@ export const ToggleGrid: ToggleGridComponent = ({
     <Controller
       name={name}
       render={({ onChange, value }) => {
-        const active = getKey(form.getValues(name)) === getKey(value);
-
         return (
-          <Grid {...props}>
-            {options.map((opt) => (
+          <Grid variant={"forms." + variant} {...props}>
+            {options.map((option) => (
               <Button
-                key={getKey(opt.value)}
-                variant={active ? buttonVariant + "Active" : buttonVariant}
+                key={getKey(option.value)}
+                variant={
+                  getKey(option.value) === getKey(value)
+                    ? buttonVariant + "Active"
+                    : buttonVariant
+                }
                 onClick={() => {
-                  onChange(value);
+                  onChange(option.value);
                 }}
               >
-                {opt.label}
+                {format(option)}
               </Button>
             ))}
           </Grid>

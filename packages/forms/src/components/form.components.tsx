@@ -46,7 +46,7 @@ export const Form: FormComponent = (inProps: any) => {
   if (!form) {
     return (
       <FormImplicit
-        variant={"form." + variant}
+        variant={"forms." + variant}
         {...{
           onSubmit,
           mode,
@@ -65,7 +65,7 @@ export const Form: FormComponent = (inProps: any) => {
   return (
     <FormProvider {...form}>
       <Box
-        variant={"form." + variant}
+        variant={"forms." + variant}
         as="form"
         onSubmit={handleSubmit(form, onSubmit)}
         {...props}

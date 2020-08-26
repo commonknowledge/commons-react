@@ -1,5 +1,5 @@
 import { Button, Input, jsx, BoxProps } from "theme-ui";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import {
   Form,
   FormItem,
@@ -17,6 +17,7 @@ import {
   DonationFormData,
 } from "../types/donations.types";
 import { useDonations, UseDonationsOpts } from "../services/donation.service";
+import { rowSpacing } from "@commonknowledge/common-ui";
 
 export interface DonateFormProps
   extends UseDonationsOpts,
@@ -40,13 +41,27 @@ export interface DonateFormProps
  */
 export const DonateForm: FC<DonateFormProps> = ({
   intervals = DEFAULT_INTERVALS,
+  amounts = DEFAULT_AMOUNTS,
   subscriptionProvider,
   ...donationServiceOpts
 }) => {
   const donations = useDonations(donationServiceOpts);
+  const currencyConverter = useMemo(
+    () =>
+      Intl.NumberFormat(undefined, {
+        style: "currency",
+        currency: "GBP",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }),
+    []
+  );
 
   return (
     <Form
+      sx={{
+        ...rowSpacing(4),
+      }}
       schema={DonationFormSchema}
       defaultValues={donations.defaultValues}
       onSubmit={async (data) => {
@@ -57,12 +72,24 @@ export const DonateForm: FC<DonateFormProps> = ({
         await donations.donate(data);
       }}
     >
-      <FormItem name="INTERVAL" label="How often would you like to contribute?">
-        <ToggleGrid options={intervals} />
+      <FormItem
+        name="INTERVAL"
+        variant="fullWidth"
+        label="How often would you like to contribute?"
+      >
+        <ToggleGrid columns={[1, 2, 3]} options={intervals} />
       </FormItem>
 
-      <FormItem name="AMOUNT" label="How much would you like to donate?">
-        {/* <DonationAmountField options={intervals} /> */}
+      <FormItem
+        variant="fullWidth"
+        name="AMOUNT"
+        label="How much would you like to donate?"
+      >
+        <ToggleGrid
+          columns={[1, 2, 3]}
+          options={amounts}
+          format={(x) => currencyConverter.format(Number(x.value))}
+        />
       </FormItem>
 
       <FormItem name="EMAIL" label="Your email">

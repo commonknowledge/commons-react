@@ -1,12 +1,21 @@
 import { useFormContext } from "react-hook-form";
 import { FC, ReactElement, ComponentType, cloneElement, useMemo } from "react";
-import { BoxProps, Box, Label, LabelProps, Checkbox, jsx } from "theme-ui";
+import {
+  BoxProps,
+  Box,
+  Label,
+  LabelProps,
+  Checkbox,
+  jsx,
+  Text,
+} from "theme-ui";
 import { uniqueId } from "lodash";
 
 interface FieldProps {
   name: string;
   variant?: string;
   label?: string;
+  helpText?: string;
   children?: ReactElement<
     unknown,
     ComponentType<{ name?: string; disabled?: boolean }>
@@ -18,6 +27,7 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
   label,
   children,
   name,
+  helpText,
   ...props
 }) => {
   const form = useFormContext();
@@ -25,7 +35,11 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
 
   return (
     <Box variant={variant && "forms." + variant} {...props}>
-      {label && <Label htmlFor={id}>{label}</Label>}
+      {label && (
+        <Label mb={1} htmlFor={id}>
+          {label}
+        </Label>
+      )}
       {children &&
         cloneElement(children, {
           name,
@@ -33,6 +47,11 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
           disabled: form.formState.isSubmitting || children.props.disabled,
           ref: form.register,
         })}
+      {helpText && (
+        <Text mt={1} variant="helpText">
+          {helpText}
+        </Text>
+      )}
     </Box>
   );
 };

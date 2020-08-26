@@ -5,7 +5,10 @@
   "browser": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@theme-ui/typography": "^0.3.0",
+    "polished": "^3.6.5"
+  },
   "devDependencies": {
     "@types/lodash": "^4.14.157",
     "@types/theme-ui": "^0.3.6",
