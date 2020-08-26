@@ -1,0 +1,9 @@
+{
+  "extends": "../../../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "../../dist/cjs",
+    "module": "commonjs"
+  },
+  "references": [{ "path": "../../../forms/src/tsconfig.cjs.json" }]
+}

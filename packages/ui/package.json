@@ -1,0 +1,24 @@
+{
+  "name": "@commonknowledge/common-ui",
+  "version": "1.0.0",
+  "main": "dist/cjs/index.js",
+  "browser": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/lodash": "^4.14.157",
+    "@types/theme-ui": "^0.3.6",
+    "@types/yup": "^0.29.5",
+    "react": "^16.13.1"
+  },
+  "peerDependencies": {
+    "@types/theme-ui": "^0.3.6",
+    "react": "^16.13.1",
+    "theme-ui": "^0.3.6"
+  },
+  "files": [
+    "browser",
+    "dist"
+  ]
+}

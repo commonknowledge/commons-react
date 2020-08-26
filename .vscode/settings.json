@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "**/.next": true,
+    // "**/*.tsbuildinfo": true,
+    "**/node_modules": true,
+    "packages/*/browser": true,
+    "packages/*/api": true,
+    "packages/*/dist": true
+  },
+  "editor.formatOnSave": true
+}

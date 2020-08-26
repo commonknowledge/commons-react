@@ -1,0 +1,13 @@
+{
+  "extends": "../../../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "../../dist/esm",
+    "module": "esnext"
+  },
+  "references": [
+    { "path": "../../../analytics/src/tsconfig.esm.json" },
+    { "path": "../../../forms/src/tsconfig.esm.json" },
+    { "path": "../../../subscriptions/src/client/tsconfig.esm.json" }
+  ]
+}

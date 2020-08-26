@@ -1,0 +1,30 @@
+{
+  "name": "@commonknowledge/common-forms",
+  "version": "1.0.0",
+  "main": "dist/cjs/index.js",
+  "browser": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@hookform/resolvers": "^0.1.0",
+    "@stripe/stripe-js": "^1.9.0",
+    "@theme-ui/components": "^0.3.1",
+    "lodash": "^4.17.15",
+    "react-hook-form": "^6.4.0",
+    "theme-ui": "^0.3.1",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.157",
+    "@types/theme-ui": "^0.3.6",
+    "@types/yup": "^0.29.5",
+    "react": "^16.13.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
+  },
+  "files": [
+    "browser",
+    "dist"
+  ]
+}
