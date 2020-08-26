@@ -31,22 +31,30 @@ export const FormSubmit: FC<FormSubmitProps> = ({
         ...containerProps.sx,
       }}
     >
-      <Spinner
-        {...spinnerProps}
-        sx={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          zIndex: -1,
-          transform: "translate(-50%, -50%)",
-          height: "100%",
-          ...spinnerProps.sx,
-        }}
-      />
+      {form.formState.isSubmitting && (
+        <Spinner
+          {...spinnerProps}
+          sx={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            zIndex: -1,
+            transform: "translate(-50%, -50%)",
+            height: "100%",
+            ...spinnerProps.sx,
+          }}
+        />
+      )}
       <Button
-        sx={{ opacity: form.formState.isSubmitting ? 0 : 1 }}
+        sx={{
+          ...(form.formState.isSubmitting
+            ? { opacity: 0, "&:hover": { opacity: 0 } }
+            : {}),
+        }}
         type="submit"
-        disabled={disabled || form.formState.isSubmitting}
+        disabled={
+          disabled || !form.formState.isValid || form.formState.isSubmitting
+        }
         {...props}
       />
     </Box>

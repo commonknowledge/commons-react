@@ -11,7 +11,7 @@ import {
 } from "theme-ui";
 import { uniqueId } from "lodash";
 
-interface FieldProps {
+interface FormItemProps {
   name: string;
   variant?: string;
   label?: string;
@@ -22,7 +22,7 @@ interface FieldProps {
   >;
 }
 
-export const FormItem: FC<FieldProps & BoxProps> = ({
+export const FormItem: FC<FormItemProps & BoxProps> = ({
   variant = "item",
   label,
   children,
@@ -32,6 +32,9 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
 }) => {
   const form = useFormContext();
   const id = useMemo(() => uniqueId(name), []);
+  const error = form.errors[name];
+
+  console.log(error);
 
   return (
     <Box variant={variant && "forms." + variant} {...props}>
@@ -47,9 +50,14 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
           disabled: form.formState.isSubmitting || children.props.disabled,
           ref: form.register,
         })}
-      {helpText && (
+      {helpText && !error && (
         <Text mt={1} variant="helpText">
           {helpText}
+        </Text>
+      )}
+      {error && (
+        <Text mt={1} variant="error">
+          {error.message}
         </Text>
       )}
     </Box>
@@ -57,7 +65,7 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
 };
 
 export const CheckboxFormItem: FC<
-  Omit<FieldProps, "children"> & Omit<LabelProps, "ref">
+  Omit<FormItemProps, "children"> & Omit<LabelProps, "ref">
 > = ({ variant = "item", label, name, ...props }) => {
   const form = useFormContext();
 

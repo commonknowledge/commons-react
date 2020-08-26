@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "tsc --build $(find packages | grep 'tsconfig\\..*\\.json$')",
+    "typecheck": "yarn build --noemit",
     "clean": "rm -rf packages/*/dist packages/*/api",
     "test": "jest",
     "storybook": "start-storybook -p 6006",

@@ -26,6 +26,19 @@ const theme: CommonTheme = {
     secondary: "#00E8A2",
     accent: "#00E8A2",
     control: "#666",
+    error: "red",
+  },
+  text: {
+    helpText: {
+      fontSize: 1,
+      color: "muted",
+    },
+    error: themeMixins([
+      "text.helpText",
+      {
+        color: "error",
+      },
+    ]),
   },
   links: {
     default: {
@@ -71,6 +84,10 @@ const components = {
       "&:hover": {
         opacity: 0.7,
       },
+      "&:disabled": {
+        opacity: 0.5,
+        cursor: "default",
+      },
     },
     outline: themeMixins([
       "buttons.button",
@@ -109,6 +126,10 @@ const components = {
       flexDirection: "column",
       alignItems: ["stretch", "flex-start"],
     },
+    label: {
+      fontSize: 1,
+      fontWeight: 500,
+    },
     item: {
       alignItems: ["stretch", "flex-start"],
     },
@@ -116,7 +137,6 @@ const components = {
       alignSelf: "stretch",
       alignItems: "stretch",
     },
-    label: {},
     input: {
       color: "control",
       p: 1,
