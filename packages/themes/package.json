@@ -1,5 +1,5 @@
 {
-  "name": "@commonknowledge/common-ui",
+  "name": "@commonknowledge/common-themes",
   "version": "1.0.0",
   "main": "dist/cjs/index.js",
   "browser": "dist/esm/index.js",
@@ -9,7 +9,6 @@
   "devDependencies": {
     "@types/lodash": "^4.14.157",
     "@types/theme-ui": "^0.3.6",
-    "@types/yup": "^0.29.5",
     "react": "^16.13.1"
   },
   "peerDependencies": {

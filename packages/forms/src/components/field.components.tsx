@@ -23,44 +23,8 @@ export const ToggleGrid: ToggleGridComponent = ({
   options,
   ...props
 }: ToggleGridProps<any>) => {
-  const form = useFormContext();
-  if (!name) {
-    throw TypeError("<ToggleGrid /> must have its name prop set");
-  }
+  console.log({ name });
 
-  return (
-    <Controller
-      name={name}
-      render={({ onChange, value }) => {
-        const active = getKey(form.getValues(name)) === getKey(value);
-
-        return (
-          <Grid {...props}>
-            {options.map((opt) => (
-              <Button
-                key={getKey(opt.value)}
-                variant={active ? buttonVariant + "Active" : buttonVariant}
-                onClick={() => {
-                  onChange(value);
-                }}
-              >
-                {opt.label}
-              </Button>
-            ))}
-          </Grid>
-        );
-      }}
-    />
-  );
-};
-
-export const ToggleGrid: ToggleGridComponent = ({
-  name,
-  buttonVariant = "toggle",
-  getKey = String,
-  options,
-  ...props
-}: ToggleGridProps<any>) => {
   const form = useFormContext();
   if (!name) {
     throw TypeError("<ToggleGrid /> must have its name prop set");

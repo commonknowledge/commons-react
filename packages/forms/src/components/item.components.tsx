@@ -7,7 +7,7 @@ interface FieldProps {
   name: string;
   variant?: string;
   label?: string;
-  children: ReactElement<
+  children?: ReactElement<
     unknown,
     ComponentType<{ name?: string; disabled?: boolean }>
   >;
@@ -17,6 +17,7 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
   variant = "item",
   label,
   children,
+  name,
   ...props
 }) => {
   const form = useFormContext();
@@ -25,12 +26,13 @@ export const FormItem: FC<FieldProps & BoxProps> = ({
   return (
     <Box variant={variant && "forms." + variant} {...props}>
       {label && <Label htmlFor={id}>{label}</Label>}
-      {cloneElement(children, {
-        name,
-        id,
-        disabled: form.formState.isSubmitting || children.props.disabled,
-        ref: form.register,
-      })}
+      {children &&
+        cloneElement(children, {
+          name,
+          id,
+          disabled: form.formState.isSubmitting || children.props.disabled,
+          ref: form.register,
+        })}
     </Box>
   );
 };

@@ -41,10 +41,9 @@ export interface DonateFormProps
 export const DonateForm: FC<DonateFormProps> = ({
   intervals = DEFAULT_INTERVALS,
   subscriptionProvider,
-  successUrl,
-  cancelUrl,
+  ...donationServiceOpts
 }) => {
-  const donations = useDonations({ successUrl, cancelUrl });
+  const donations = useDonations(donationServiceOpts);
 
   return (
     <Form

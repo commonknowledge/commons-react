@@ -11,21 +11,28 @@ import {
   DonationFormSchema,
 } from "../types/donations.types";
 
-if (!process.env.STRIPE_PUBLISHABLE_KEY) {
-  throw Error("STRIPE_PUBLISHABLE_KEY is not defined");
-}
-
-const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
-
 export interface UseDonationsOpts {
   /** Url to redirect to on successful donation */
-  successUrl: string;
+  successUrl?: string;
 
   /** Url to redirect to on cancelling donation */
-  cancelUrl: string;
+  cancelUrl?: string;
+
+  /** Stripe public API key. Defaults to process.env.STRIPE_PUBLISHABLE_KEY */
+  stripeApiKey?: string;
 }
 
-export const useDonations = ({ successUrl, cancelUrl }: UseDonationsOpts) => {
+export const useDonations = ({
+  successUrl,
+  cancelUrl,
+  stripeApiKey = process.env.STRIPE_PUBLISHABLE_KEY,
+}: UseDonationsOpts) => {
+  if (!stripeApiKey) {
+    throw Error(
+      "stripeApiKey prop not provided and process.env.STRIPE_PUBLISHABLE_KEY not defined"
+    );
+  }
+
   const analytics = useAnalytics();
   // Preload any query strings from the URL into the form too
   const queryParams = qs.decode(
@@ -49,10 +56,14 @@ export const useDonations = ({ successUrl, cancelUrl }: UseDonationsOpts) => {
       // Prepare the stripe payment redirects
       const payload = qs.encode(data);
       const host = window.location.protocol + "//" + window.location.host;
-      const successUrlFull = `${host}${successUrl}?${payload}`;
-      const cancelUrlFull = `${host}${cancelUrl}?${payload}`;
+      const successUrlFull = `${host}${
+        successUrl || window.location.pathname
+      }?${payload}`;
+      const cancelUrlFull = `${host}${
+        cancelUrl || window.location.pathname
+      }?${payload}`;
 
-      const stripe = await loadStripe(STRIPE_PUBLISHABLE_KEY);
+      const stripe = await loadStripe(stripeApiKey);
       if (!stripe) throw new Error("Couldn't load our payment system, Stripe.");
 
       analytics.trackEvent(`donation-interval-${data.INTERVAL}`, {
@@ -115,4 +126,3 @@ const cache: any = {};
 const getCacheKey = (...args: any[]) => args.join();
 
 export const DEFAULT_CURRENCY = "gbp";
-const PRODUCT_ID = process.env.STRIPE_DONATION_PRODUCT_ID!;

@@ -4,7 +4,9 @@
   "scripts": {
     "build": "tsc --build $(find packages | grep 'tsconfig\\..*\\.json$')",
     "clean": "rm -rf packages/*/dist packages/*/api",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "workspaces": [
     "packages/*",
@@ -24,6 +26,10 @@
     "typescript": "^3.9.7"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.0.18",
+    "@storybook/addon-docs": "^6.0.18",
+    "@storybook/addon-links": "^6.0.18",
+    "@storybook/react": "^6.0.18",
     "@types/express": "^4.17.7",
     "@types/jest": "^26.0.4",
     "jest": "^26.1.0",

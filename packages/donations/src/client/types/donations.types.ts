@@ -16,7 +16,6 @@ export const DEFAULT_INTERVALS: DonationInterval[] = [
   {
     value: "month",
     label: "Every month",
-    default: true,
   },
 ];
 

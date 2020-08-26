@@ -5,5 +5,3 @@ import { Box, jsx, GridProps } from "theme-ui";
 interface DonationIntervalFieldProps extends GridProps {
   options: Array<DonationInterval>;
 }
-
-export const DonationIntervalField = 
