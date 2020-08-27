@@ -13,7 +13,7 @@ jobs:
         run: |
           yarn
           yarn lerna bootstrap
-          yarn build
+          yarn build || find packages
           yarn build-storybook
 
       - name: Deploy 🚀

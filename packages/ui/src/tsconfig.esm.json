@@ -4,5 +4,6 @@
     "composite": true,
     "outDir": "../dist/esm",
     "module": "esnext"
-  }
+  },
+  "references": [{ "path": "../../themes/src/tsconfig.esm.json" }]
 }

@@ -6,6 +6,7 @@
     "module": "esnext"
   },
   "references": [
+    { "path": "../../../themes/src/tsconfig.esm.json" },
     { "path": "../../../analytics/src/tsconfig.esm.json" },
     { "path": "../../../forms/src/tsconfig.esm.json" },
     { "path": "../../../subscriptions/src/client/tsconfig.esm.json" }

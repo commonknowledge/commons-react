@@ -6,6 +6,7 @@
     "module": "commonjs"
   },
   "references": [
+    { "path": "../../../themes/src/tsconfig.cjs.json" },
     { "path": "../../../analytics/src/tsconfig.cjs.json" },
     { "path": "../../../forms/src/tsconfig.cjs.json" },
     { "path": "../../../subscriptions/src/client/tsconfig.cjs.json" }

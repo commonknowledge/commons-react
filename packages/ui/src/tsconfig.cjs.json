@@ -4,5 +4,6 @@
     "composite": true,
     "outDir": "../dist/cjs",
     "module": "commonjs"
-  }
+  },
+  "references": [{ "path": "../../themes/src/tsconfig.cjs.json" }]
 }
