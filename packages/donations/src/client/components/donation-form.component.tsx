@@ -1,4 +1,4 @@
-import { Button, Input, jsx, BoxProps } from "theme-ui";
+import { Input, jsx, BoxProps } from "theme-ui";
 import { FC, useMemo } from "react";
 import {
   Form,
@@ -15,7 +15,6 @@ import {
   DEFAULT_INTERVALS,
   DEFAULT_AMOUNTS,
   DonationFormSchema,
-  DonationFormData,
 } from "../types/donations.types";
 import { useDonations, UseDonationsOpts } from "../services/donation.service";
 

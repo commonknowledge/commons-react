@@ -1,8 +1,9 @@
 import { forwardRef, ReactNode, ReactElement } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { jsx, Grid, GridProps, Button } from "theme-ui";
 
-interface ToggleGridProps<T = {}> extends Omit<GridProps, "ref"> {
+interface ToggleGridProps<T = Record<string, unknown>>
+  extends Omit<GridProps, "ref"> {
   name?: string;
   options: SelectOption<T>[];
   buttonVariant?: string;
@@ -17,19 +18,16 @@ interface SelectOption<T> {
 
 type ToggleGridComponent = <T>(props: ToggleGridProps<T>) => ReactElement;
 
-export const ToggleGrid = forwardRef<any, ToggleGridProps<any>>(
-  (
-    {
-      name,
-      variant = "grid",
-      buttonVariant = "toggle",
-      getKey = String,
-      options,
-      format = (x) => x.label || String(x.value),
-      ...props
-    },
-    ref
-  ) => {
+export const ToggleGrid = forwardRef<unknown, ToggleGridProps>(
+  ({
+    name,
+    variant = "grid",
+    buttonVariant = "toggle",
+    getKey = String,
+    options,
+    format = (x) => x.label || String(x.value),
+    ...props
+  }) => {
     if (!name) {
       throw TypeError("<ToggleGrid /> must have its name prop set");
     }

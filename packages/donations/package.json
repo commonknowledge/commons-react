@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./dist/cjs/index.d.ts",
   "browser": "./dist/esm/index.js",
-  "typings": "./dist/esm/index.d.ts",
+  "typings": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "@commonknowledge/common-forms": "^1.0.0",

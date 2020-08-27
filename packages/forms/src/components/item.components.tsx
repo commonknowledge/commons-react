@@ -31,7 +31,7 @@ export const FormItem: FC<FormItemProps & BoxProps> = ({
   ...props
 }) => {
   const form = useFormContext();
-  const id = useMemo(() => uniqueId(name), []);
+  const id = useMemo(() => uniqueId(name), [name]);
   const error = form.errors[name];
 
   return (

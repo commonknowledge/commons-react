@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { object, mixed, string, boolean, InferType } from "yup";
+import { object, mixed, string, boolean } from "yup";
 
 export type PayInterval = Stripe.PlanCreateParams.Interval | "one_time";
 

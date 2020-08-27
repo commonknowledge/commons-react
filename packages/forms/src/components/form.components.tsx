@@ -1,5 +1,5 @@
-import { FC, ReactElement, useEffect } from "react";
-import { jsx, BoxProps, Box, Field } from "theme-ui";
+import { FC, ReactElement, FormEventHandler } from "react";
+import { jsx, BoxProps, Box } from "theme-ui";
 import { UseFormMethods, FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers";
 import {
@@ -8,6 +8,7 @@ import {
   ErrorOption,
 } from "react-hook-form/dist/types/form";
 import { Schema } from "yup";
+
 import { FormError } from "../errors/form.error";
 
 interface FormPropsBase<T> extends Omit<BoxProps, "onSubmit"> {
@@ -39,7 +40,7 @@ type FormComponent = <T>(
  *    - As an uncontrolled component by passing in a Yup vaildation schema, which which will be
  *      passed into useForm for you, with some sensible default values.
  */
-export const Form: FormComponent = (inProps: any) => {
+export const Form: FormComponent = (inProps: unknown) => {
   const {
     form,
     variant = "form",
@@ -53,7 +54,8 @@ export const Form: FormComponent = (inProps: any) => {
     criteriaMode,
     schema,
     ...props
-  } = inProps as FormPropsControlled<any> & FormPropsUncontrolled<any>;
+  } = inProps as FormPropsControlled<Record<string, unknown>> &
+    FormPropsUncontrolled<Record<string, unknown>>;
 
   if (!form) {
     return (
@@ -87,7 +89,7 @@ export const Form: FormComponent = (inProps: any) => {
   );
 };
 
-const FormImplicit: FC<FormPropsUncontrolled<any>> = ({
+const FormImplicit: FC<FormPropsUncontrolled<Record<string, unknown>>> = ({
   mode,
   reValidateMode,
   context,
@@ -119,10 +121,10 @@ const FormImplicit: FC<FormPropsUncontrolled<any>> = ({
 
 const handleSubmit = (
   form: UseFormMethods,
-  submit: (x: any) => Promise<void>
-) => async (data: any) => {
+  submit: (x: Record<string, unknown>) => Promise<void>
+): FormEventHandler => async () => {
   try {
-    await form.handleSubmit(submit)(data);
+    await form.handleSubmit(submit)();
   } catch (error) {
     if (error instanceof FormError) {
       error.fieldErrors.forEach(({ field, ...info }) => {

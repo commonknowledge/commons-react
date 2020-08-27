@@ -1,5 +1,7 @@
 import { createContext, FC, createElement, useContext, useEffect } from "react";
+
 import { AnalyticsProvider } from "../interfaces/analytics.interfaces";
+
 import { nullAnalyticsProvider } from "./null-analytics.service";
 
 const AnalyticsContext = createContext<AnalyticsProvider>(
@@ -12,7 +14,7 @@ export const ProvideAnalytics: FC<{ provider: AnalyticsProvider }> = ({
 }) => {
   useEffect(() => {
     provider.initialize();
-  }, []);
+  }, [provider]);
 
   return createElement(AnalyticsContext.Provider, {
     value: provider,

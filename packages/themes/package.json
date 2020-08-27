@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "./dist/cjs/index.js",
   "browser": "./dist/esm/index.js",
-  "typings": "./dist/esm/index.d.ts",
+  "typings": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "@theme-ui/typography": "^0.3.0",

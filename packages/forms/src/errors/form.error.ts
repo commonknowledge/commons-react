@@ -1,5 +1,3 @@
-import { FieldError } from "react-hook-form";
-
 interface FormFieldError {
   field: string;
   type?: string;

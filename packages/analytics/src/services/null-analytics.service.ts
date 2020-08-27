@@ -1,7 +1,9 @@
+import { noop } from "lodash";
+
 import { AnalyticsProvider } from "../interfaces/analytics.interfaces";
 
 export const nullAnalyticsProvider = (): AnalyticsProvider => ({
-  initialize: () => {},
-  trackUser: () => {},
-  trackEvent: () => {},
+  initialize: noop,
+  trackUser: noop,
+  trackEvent: noop,
 });

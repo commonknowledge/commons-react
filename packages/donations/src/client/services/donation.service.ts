@@ -2,9 +2,10 @@ import * as qs from "querystring";
 
 import { useAnalytics } from "@commonknowledge/common-analytics";
 import { loadStripe } from "@stripe/stripe-js/pure";
+import { InferType } from "yup";
 
 import { DonationFormData, DonationFormSchema } from "../types/donations.types";
-import { InferType } from "yup";
+
 import { getStripePlans } from "./stripe.service";
 
 export interface UseDonationsOpts {
@@ -57,7 +58,7 @@ export const useDonations = ({
 
       // Get the stripe payment data from the user options
       const stripeItems = await getStripePlans(
-        Number(data!.AMOUNT),
+        Number(data?.AMOUNT),
         data.INTERVAL,
         DEFAULT_CURRENCY
       );

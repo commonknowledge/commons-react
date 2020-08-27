@@ -1,5 +1,6 @@
-import { merge, times } from "lodash";
+import { merge } from "lodash";
 import { toTheme } from "@theme-ui/typography";
+
 import { CommonTheme } from "../interfaces/ext-theme.interface";
 import {
   NeueHaasGroteskFontStack,

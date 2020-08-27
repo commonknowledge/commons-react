@@ -1,6 +1,7 @@
-import { PayInterval } from "../types/donations.types";
 import { RedirectToCheckoutClientOptions } from "@stripe/stripe-js";
 import request from "superagent";
+
+import { PayInterval } from "../types/donations.types";
 
 export const getStripePlans = async (
   amount: number,
@@ -19,5 +20,5 @@ export const getStripePlans = async (
   return items;
 };
 
-const cache: any = {};
-const getCacheKey = (...args: any[]) => args.join();
+const cache: Record<string, Partial<RedirectToCheckoutClientOptions>> = {};
+const getCacheKey = (...args: unknown[]) => args.join();
