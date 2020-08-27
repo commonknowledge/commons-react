@@ -22,7 +22,7 @@ const theme: CommonTheme = {
     background: "#F0F0F0",
     backgroundTranslucent: "rgba(240,240,240,0.95)",
     muted: "#ACACAC",
-    primary: "#111",
+    primary: "#444",
     secondary: "#00E8A2",
     accent: "#00E8A2",
     control: "#666",

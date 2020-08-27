@@ -6,8 +6,8 @@
     "typecheck": "yarn build --noemit",
     "clean": "rm -rf packages/*/dist packages/*/api",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 --docs",
+    "build-storybook": "build-storybook --docs"
   },
   "workspaces": [
     "packages/*",
