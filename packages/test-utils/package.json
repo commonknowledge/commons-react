@@ -1,23 +1,22 @@
 {
-  "name": "@commonknowledge/common-ui",
+  "name": "@commonknowledge/common-test-utils",
   "version": "1.0.0",
   "main": "dist/cjs/index.js",
   "browser": "dist/esm/index.js",
   "typings": "dist/esm/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@commonknowledge/common-themes": "^1.0.0"
+    "@commonknowledge/common-themes": "^1.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "superagent": "^6.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.157",
-    "@types/theme-ui": "^0.3.6",
-    "@types/yup": "^0.29.5",
     "react": "^16.13.1"
   },
   "peerDependencies": {
-    "@types/theme-ui": "^0.3.6",
-    "react": "^16.13.1",
-    "theme-ui": "^0.3.6"
+    "react": "^16.13.1"
   },
   "files": [
     "dist"

@@ -1,5 +1,4 @@
 import { merge, get } from "lodash";
-import { SystemCssProperties } from "@styled-system/css";
 import { SxStyleProp } from "theme-ui";
 
 import { CommonTheme } from "../interfaces/ext-theme.interface";

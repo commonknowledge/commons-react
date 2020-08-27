@@ -2,16 +2,10 @@ import * as qs from "querystring";
 
 import { useAnalytics } from "@commonknowledge/common-analytics";
 import { loadStripe } from "@stripe/stripe-js/pure";
-import { RedirectToCheckoutClientOptions } from "@stripe/stripe-js";
-import { useAsync } from "react-async-hook";
 
-import {
-  DonationFormData,
-  PayInterval,
-  DonationFormSchema,
-} from "../types/donations.types";
-import { DonationInterval } from "../../../dist/cjs/types/donations.types";
+import { DonationFormData, DonationFormSchema } from "../types/donations.types";
 import { InferType } from "yup";
+import { getStripePlans } from "./stripe.service";
 
 export interface UseDonationsOpts {
   /** Url to redirect to on successful donation */
@@ -62,7 +56,7 @@ export const useDonations = ({
       analytics.trackEvent("attemptDonation", { category: "forms" });
 
       // Get the stripe payment data from the user options
-      const stripeItems = await getStripePlan(
+      const stripeItems = await getStripePlans(
         Number(data!.AMOUNT),
         data.INTERVAL,
         DEFAULT_CURRENCY
@@ -104,40 +98,5 @@ export const useDonations = ({
   };
 };
 
-export const getStripePlan = async (
-  amount: number,
-  interval: PayInterval,
-  currency: string
-): Promise<Exclude<RedirectToCheckoutClientOptions["items"], undefined>> => {
-  if (cache[getCacheKey(amount, interval, currency)]) {
-    return cache[getCacheKey(amount, interval, currency)];
-  }
-
-  const res = await fetch(`/api/getStripePlans`, {
-    method: "POST",
-    body: JSON.stringify({ amount, interval, currency }),
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-    },
-  });
-  const items = await res.json();
-  cache[getCacheKey(amount, interval, currency)] = items;
-  return items;
-};
-
-export const useStripePlan = (
-  amount: number,
-  interval: PayInterval | typeof NO_DONATION,
-  currency: string
-) => {
-  return useAsync(async () => {
-    if (interval === NO_DONATION) return [];
-    return getStripePlan(amount, interval, currency);
-  }, [amount, interval]);
-};
-
 export const NO_DONATION = "NO_DONATION";
-const cache: any = {};
-const getCacheKey = (...args: any[]) => args.join();
-
 export const DEFAULT_CURRENCY = "gbp";
