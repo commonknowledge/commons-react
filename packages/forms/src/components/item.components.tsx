@@ -34,8 +34,6 @@ export const FormItem: FC<FormItemProps & BoxProps> = ({
   const id = useMemo(() => uniqueId(name), []);
   const error = form.errors[name];
 
-  console.log(error);
-
   return (
     <Box variant={variant && "forms." + variant} {...props}>
       {label && (

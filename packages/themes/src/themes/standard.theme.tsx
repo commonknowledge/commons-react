@@ -153,8 +153,6 @@ const components = {
   },
 };
 
-console.log(toTheme(typography));
-
 export const StandardTheme: CommonTheme = merge(
   {},
   toTheme(typography),

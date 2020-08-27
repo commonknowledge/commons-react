@@ -14,34 +14,46 @@ interface FormPropsBase<T> extends Omit<BoxProps, "onSubmit"> {
   onSubmit: (values: NonNullable<UnpackNestedValue<T>>) => Promise<void>;
 }
 
-export interface FormPropsExplicit<T> extends FormPropsBase<T> {
+export interface FormPropsControlled<T> extends FormPropsBase<T> {
   form: UseFormMethods<T>;
 }
 
-export interface FormPropsImplicit<T>
+export interface FormPropsUncontrolled<T>
   extends FormPropsBase<T>,
     UseFormOptions<T> {
   schema: Schema<T>;
 }
 
 type FormComponent = <T>(
-  props: FormPropsImplicit<T> | FormPropsExplicit<T>
+  props: FormPropsUncontrolled<T> | FormPropsControlled<T>
 ) => ReactElement;
 
+/**
+ * Convenience wrapper around react-hook-form combining an html <form> component that:
+ *    - Prevents default on onComplete for you.
+ *    - Hooks into theme-ui's variant system under the 'forms' namespace (default variant: forms.form)
+ *    - Injects the form into the react context so that <FormItem> and <SubmitButton> can pick it up.
+ *
+ * Can be used _either_:
+ *    - As a controlled component by explicitly passing in the result of `useForm`.
+ *    - As an uncontrolled component by passing in a Yup vaildation schema, which which will be
+ *      passed into useForm for you, with some sensible default values.
+ */
 export const Form: FormComponent = (inProps: any) => {
   const {
     form,
     variant = "form",
     onSubmit,
-    mode,
+    mode = "onBlur",
     reValidateMode,
+    defaultValues,
     context,
     shouldFocusError,
     shouldUnregister,
     criteriaMode,
     schema,
     ...props
-  } = inProps as FormPropsExplicit<any> & FormPropsImplicit<any>;
+  } = inProps as FormPropsControlled<any> & FormPropsUncontrolled<any>;
 
   if (!form) {
     return (
@@ -51,6 +63,7 @@ export const Form: FormComponent = (inProps: any) => {
           onSubmit,
           mode,
           reValidateMode,
+          defaultValues,
           context,
           shouldFocusError,
           shouldUnregister,
@@ -74,11 +87,12 @@ export const Form: FormComponent = (inProps: any) => {
   );
 };
 
-const FormImplicit: FC<FormPropsImplicit<any>> = ({
+const FormImplicit: FC<FormPropsUncontrolled<any>> = ({
   mode,
   reValidateMode,
   context,
   shouldFocusError,
+  defaultValues,
   shouldUnregister,
   criteriaMode,
   onSubmit,
@@ -88,6 +102,7 @@ const FormImplicit: FC<FormPropsImplicit<any>> = ({
   const form = useForm({
     mode,
     reValidateMode,
+    defaultValues,
     context,
     shouldFocusError,
     shouldUnregister,

@@ -17,46 +17,48 @@ interface SelectOption<T> {
 
 type ToggleGridComponent = <T>(props: ToggleGridProps<T>) => ReactElement;
 
-export const ToggleGrid: ToggleGridComponent = ({
-  name,
-  variant = "grid",
-  buttonVariant = "toggle",
-  getKey = String,
-  options,
-  format = (x) => x.label || String(x.value),
-  ...props
-}: ToggleGridProps<any>) => {
-  console.log({ name });
+export const ToggleGrid = forwardRef<any, ToggleGridProps<any>>(
+  (
+    {
+      name,
+      variant = "grid",
+      buttonVariant = "toggle",
+      getKey = String,
+      options,
+      format = (x) => x.label || String(x.value),
+      ...props
+    },
+    ref
+  ) => {
+    if (!name) {
+      throw TypeError("<ToggleGrid /> must have its name prop set");
+    }
 
-  const form = useFormContext();
-  if (!name) {
-    throw TypeError("<ToggleGrid /> must have its name prop set");
+    return (
+      <Controller
+        name={name}
+        render={({ onChange, value }) => {
+          return (
+            <Grid variant={"forms." + variant} {...props}>
+              {options.map((option) => (
+                <Button
+                  key={getKey(option.value)}
+                  variant={
+                    getKey(option.value) === getKey(value)
+                      ? buttonVariant + "Active"
+                      : buttonVariant
+                  }
+                  onClick={() => {
+                    onChange(option.value);
+                  }}
+                >
+                  {format(option)}
+                </Button>
+              ))}
+            </Grid>
+          );
+        }}
+      />
+    );
   }
-
-  return (
-    <Controller
-      name={name}
-      render={({ onChange, value }) => {
-        return (
-          <Grid variant={"forms." + variant} {...props}>
-            {options.map((option) => (
-              <Button
-                key={getKey(option.value)}
-                variant={
-                  getKey(option.value) === getKey(value)
-                    ? buttonVariant + "Active"
-                    : buttonVariant
-                }
-                onClick={() => {
-                  onChange(option.value);
-                }}
-              >
-                {format(option)}
-              </Button>
-            ))}
-          </Grid>
-        );
-      }}
-    />
-  );
-};
+) as ToggleGridComponent;

@@ -8,6 +8,7 @@ import {
   ToggleGrid,
 } from "@commonknowledge/common-forms";
 import { SubscriptionInterface } from "@commonknowledge/common-subscriptions";
+import { rowSpacing } from "@commonknowledge/common-ui";
 
 import {
   DonationInterval,
@@ -17,10 +18,9 @@ import {
   DonationFormData,
 } from "../types/donations.types";
 import { useDonations, UseDonationsOpts } from "../services/donation.service";
-import { rowSpacing } from "@commonknowledge/common-ui";
 
 export interface DonateFormProps
-  extends UseDonationsOpts,
+  extends Partial<UseDonationsOpts>,
     Omit<BoxProps, "ref"> {
   /** Optional donation amounts to present to the user */
   amounts?: DonationInterval[];
@@ -45,7 +45,11 @@ export const DonateForm: FC<DonateFormProps> = ({
   subscriptionProvider,
   ...donationServiceOpts
 }) => {
-  const donations = useDonations(donationServiceOpts);
+  const donations = useDonations({
+    defaultAmount: amounts[1]?.value || amounts[0]?.value,
+    defaultInterval: intervals[0].value,
+    ...donationServiceOpts,
+  });
   const currencyConverter = useMemo(
     () =>
       Intl.NumberFormat(undefined, {

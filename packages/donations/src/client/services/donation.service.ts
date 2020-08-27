@@ -10,6 +10,8 @@ import {
   PayInterval,
   DonationFormSchema,
 } from "../types/donations.types";
+import { DonationInterval } from "../../../dist/cjs/types/donations.types";
+import { InferType } from "yup";
 
 export interface UseDonationsOpts {
   /** Url to redirect to on successful donation */
@@ -18,6 +20,12 @@ export interface UseDonationsOpts {
   /** Url to redirect to on cancelling donation */
   cancelUrl?: string;
 
+  /** Default donation amount */
+  defaultAmount: string;
+
+  /** Default donation interval */
+  defaultInterval: string;
+
   /** Stripe public API key. Defaults to process.env.STRIPE_PUBLISHABLE_KEY */
   stripeApiKey?: string;
 }
@@ -25,6 +33,8 @@ export interface UseDonationsOpts {
 export const useDonations = ({
   successUrl,
   cancelUrl,
+  defaultAmount,
+  defaultInterval,
   stripeApiKey = process.env.STRIPE_PUBLISHABLE_KEY,
 }: UseDonationsOpts) => {
   if (!stripeApiKey) {
@@ -39,9 +49,14 @@ export const useDonations = ({
     typeof window === `undefined` ? "" : window.location.search
   );
   const formValuesFromURLQueryString = DonationFormSchema.cast(queryParams);
+  const defaultValues: InferType<typeof DonationFormSchema> = {
+    INTERVAL: defaultInterval,
+    AMOUNT: defaultAmount,
+    ...formValuesFromURLQueryString,
+  };
 
   return {
-    defaultValues: formValuesFromURLQueryString,
+    defaultValues,
     donate: async (data: DonationFormData) => {
       analytics.trackUser(data.EMAIL);
       analytics.trackEvent("attemptDonation", { category: "forms" });

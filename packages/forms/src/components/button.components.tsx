@@ -22,6 +22,8 @@ export const FormSubmit: FC<FormSubmitProps> = ({
   ...props
 }) => {
   const form = useFormContext();
+  const disableWhenInvalid =
+    form.control.mode.isOnBlur || form.control.mode.isOnChange;
 
   return (
     <Box
@@ -52,9 +54,7 @@ export const FormSubmit: FC<FormSubmitProps> = ({
             : {}),
         }}
         type="submit"
-        disabled={
-          disabled || !form.formState.isValid || form.formState.isSubmitting
-        }
+        disabled={disabled || (disableWhenInvalid && !form.formState.isValid)}
         {...props}
       />
     </Box>
