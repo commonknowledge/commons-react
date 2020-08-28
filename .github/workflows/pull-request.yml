@@ -26,8 +26,9 @@ jobs:
         run: |
           yarn test
 
-      - uses: paambaati/codeclimate-action@v2.2.4
+      - name: Submit code coverage 🌞
+        uses: paambaati/codeclimate-action@v2.6.0
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+          CC_TEST_REPORTER_ID: c093fda0d6736c3e10fe1e91e437b59a231c6357ea38cc4e353e3efc31223854
         with:
           coverageCommand: yarn test --collectCoverage
