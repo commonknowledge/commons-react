@@ -1,5 +1,6 @@
 import { merge } from "lodash";
 import { toTheme } from "@theme-ui/typography";
+import { transitions } from "polished";
 
 import { CommonTheme } from "../interfaces/ext-theme.interface";
 import {
@@ -64,6 +65,18 @@ const theme: CommonTheme = {
       backgroundColor: "background",
       fontFamily: "body",
     },
+  },
+  animations: {
+    disclosure: {
+      opacity: 0,
+      ...transitions(["opacity", "max-height"], "350ms ease-in-out"),
+    },
+    disclosureActive: themeMixins([
+      "animations.disclosure",
+      {
+        opacity: 1,
+      },
+    ]),
   },
   fontStack: [NeueHaasGroteskFontStack],
 };
