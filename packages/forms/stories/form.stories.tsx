@@ -74,6 +74,6 @@ export const WithErrors = () => {
 const wait = () => new Promise<void>((resolve) => setTimeout(resolve, 2000));
 
 export default {
-  title: "Forms/Form",
+  title: "common-forms/Form",
   component: Form,
 } as Meta;

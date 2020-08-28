@@ -7,6 +7,6 @@ import { DonateForm, DonateFormProps } from "@commonknowledge/common-donations";
 export const Default = () => <DonateForm stripeApiKey="DUMMY" />;
 
 export default {
-  title: "Donations/Donate Form",
+  title: "common-donations/Donate Form",
   component: DonateForm,
 } as Meta<DonateFormProps>;
