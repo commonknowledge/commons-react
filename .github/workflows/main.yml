@@ -19,6 +19,10 @@ jobs:
           yarn build
           yarn build-storybook
 
+      - name: Test ✅
+        run: |
+          yarn test
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
