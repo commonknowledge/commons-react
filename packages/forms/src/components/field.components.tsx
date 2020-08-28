@@ -19,15 +19,18 @@ interface SelectOption<T> {
 type ToggleGridComponent = <T>(props: ToggleGridProps<T>) => ReactElement;
 
 export const ToggleGrid = forwardRef<unknown, ToggleGridProps>(
-  ({
-    name,
-    variant = "grid",
-    buttonVariant = "toggle",
-    getKey = String,
-    options,
-    format = (x) => x.label || String(x.value),
-    ...props
-  }) => {
+  (
+    {
+      name,
+      variant = "grid",
+      buttonVariant = "toggle",
+      getKey = String,
+      options,
+      format = (x) => x.label || String(x.value),
+      ...props
+    },
+    _
+  ) => {
     if (!name) {
       throw TypeError("<ToggleGrid /> must have its name prop set");
     }

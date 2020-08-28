@@ -7,7 +7,7 @@ import {
   UseFormOptions,
   ErrorOption,
 } from "react-hook-form/dist/types/form";
-import { Schema } from "yup";
+import { Schema, object } from "yup";
 
 import { FormError } from "../errors/form.error";
 
@@ -22,7 +22,7 @@ export interface FormPropsControlled<T> extends FormPropsBase<T> {
 export interface FormPropsUncontrolled<T>
   extends FormPropsBase<T>,
     UseFormOptions<T> {
-  schema: Schema<T>;
+  schema?: Schema<T>;
 }
 
 type FormComponent = <T>(
@@ -98,7 +98,7 @@ const FormImplicit: FC<FormPropsUncontrolled<Record<string, unknown>>> = ({
   shouldUnregister,
   criteriaMode,
   onSubmit,
-  schema,
+  schema = object(),
   ...props
 }) => {
   const form = useForm({
@@ -122,9 +122,9 @@ const FormImplicit: FC<FormPropsUncontrolled<Record<string, unknown>>> = ({
 const handleSubmit = (
   form: UseFormMethods,
   submit: (x: Record<string, unknown>) => Promise<void>
-): FormEventHandler => async () => {
+): FormEventHandler => async (event) => {
   try {
-    await form.handleSubmit(submit)();
+    await form.handleSubmit(submit)(event);
   } catch (error) {
     if (error instanceof FormError) {
       error.fieldErrors.forEach(({ field, ...info }) => {
