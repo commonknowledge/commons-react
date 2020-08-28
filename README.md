@@ -2,6 +2,8 @@
 
 ![Logo](.storybook/logo.png)
 
+![Build Status](https://img.shields.io/github/workflow/status/commonknowledge/commons-react/Build%20and%20Deploy) [![Test Coverage](https://api.codeclimate.com/v1/badges/21911dd136ab82aaf0fc/test_coverage)](https://codeclimate.com/github/commonknowledge/commons-react/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/21911dd136ab82aaf0fc/maintainability)](https://codeclimate.com/github/commonknowledge/commons-react/maintainability)
+
 A toolkit of React components and connect-style request handlers for rapidly building tools for organisers.
 
 [Documentation](https://commonknowledge.github.io/commons-react/)

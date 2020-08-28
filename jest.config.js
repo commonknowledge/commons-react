@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { readdirSync, statSync } = require("fs");
 
 const packages = readdirSync("packages");
@@ -26,6 +27,7 @@ module.exports = {
   testPathIgnorePatterns: [
     "/node_modules/",
     "/packages/.*/dist/",
-    "/packages/.*/browser/",
+    "/packages/.*/api/",
   ],
+  collectCoverageFrom: ["<rootDir>/packages/*/src/**/*.{ts,tsx}", "!**/*.d.ts"],
 };
