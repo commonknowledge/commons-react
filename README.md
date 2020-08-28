@@ -6,16 +6,16 @@
 
 A toolkit of React components and connect-style request handlers for rapidly building tools for organisers.
 
-[Documentation](https://commonknowledge.github.io/commons-react/)
+[**Documentation**](https://commonknowledge.github.io/commons-react/)
 
 The idea is that as we work on projects, we extract our tried and tested patterns out into this library, so that they can be refined, easily re-used and viewed together to inform our design process.
 
 It makes a few assumptions about the stack you're using:
 
-- A react frontend, possibly server-side or statically rendered, using theme-ui for styling.
+- A React frontend, possibly server-side or statically rendered, using [theme-ui](https://theme-ui.com/) for styling.
 - Backend consisting of simple, possibly serverless, connect-style request handlers.
 
-It's developed with frameworks like NextJS in mind, but doesn't require you to use them.
+It's developed with frameworks like [NextJS](https://nextjs.org/) in mind, but doesn't require you to use them.
 
 Currently it includes:
 
