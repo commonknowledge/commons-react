@@ -22,7 +22,7 @@ export const createStripeDonationEndpoint = ({
   }
 
   const stripe = new Stripe(stripeSecretKey, {
-    apiVersion: "2020-03-02",
+    apiVersion: "2020-08-27",
   });
 
   const findPlan = async (
