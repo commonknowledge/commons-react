@@ -30,7 +30,11 @@ jobs:
         with:
           coverageCommand: yarn test --collectCoverage
 
-      - name: Deploy 🚀
+      - name: Deploy to npm 🚀
+        run: |
+          node scripts/deploy-npm.js
+
+      - name: Deploy Docs 🎶
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
