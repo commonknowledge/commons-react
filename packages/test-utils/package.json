@@ -1,12 +1,12 @@
 {
   "name": "@commonknowledge/common-test-utils",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "./dist/cjs/index.js",
   "browser": "./dist/esm/index.js",
   "typings": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@commonknowledge/common-themes": "^1.0.0",
+    "@commonknowledge/common-themes": "^0.0.1",
     "@testing-library/react": "^10.4.9",
     "@types/express": "^4.17.7",
     "body-parser": "^1.19.0",
