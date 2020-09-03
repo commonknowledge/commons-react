@@ -1,12 +1,12 @@
 {
   "name": "@commonknowledge/common-subscriptions",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "./dist/cjs/index.js",
   "browser": "./dist/esm/index.js",
   "typings": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@commonknowledge/common-forms": "^1.0.0",
+    "@commonknowledge/common-forms": "^0.0.1",
     "@hookform/resolvers": "^0.1.0",
     "@stripe/stripe-js": "^1.9.0",
     "@theme-ui/components": "^0.3.1",
