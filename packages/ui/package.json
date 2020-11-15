@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@commonknowledge/common-themes": "^0.0.3",
-    "@emotion/core": "^11.0.0"
+    "@emotion/core": "10"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.157",
