@@ -20,6 +20,7 @@
     "theme-ui": "^0.3.6"
   },
   "files": [
-    "dist"
+    "dist",
+    "assets"
   ]
 }
