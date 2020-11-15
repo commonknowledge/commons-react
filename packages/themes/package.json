@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@theme-ui/typography": "^0.3.0",
+    "lodash": "^4.17.20",
     "polished": "^3.6.5"
   },
   "devDependencies": {
