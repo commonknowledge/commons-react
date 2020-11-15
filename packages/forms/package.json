@@ -1,6 +1,6 @@
 {
   "name": "@commonknowledge/common-forms",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/cjs/index.js",
   "browser": "./dist/esm/index.js",
   "typings": "./dist/cjs/index.d.ts",
