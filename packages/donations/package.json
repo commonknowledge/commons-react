@@ -1,13 +1,13 @@
 {
   "name": "@commonknowledge/common-donations",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./dist/cjs/index.d.ts",
   "browser": "./dist/esm/index.js",
   "typings": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@commonknowledge/common-forms": "^0.0.3",
-    "@commonknowledge/common-subscriptions": "^0.0.3",
+    "@commonknowledge/common-forms": "^0.0.4",
+    "@commonknowledge/common-subscriptions": "^0.0.4",
     "@hookform/resolvers": "^0.1.0",
     "@stripe/stripe-js": "^1.9.0",
     "@theme-ui/components": "^0.3.1",

@@ -1,12 +1,12 @@
 {
   "name": "@commonknowledge/common-ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./dist/cjs/index.js",
   "browser": "./dist/esm/index.js",
   "typings": "./dist/cjs/index.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@commonknowledge/common-themes": "^0.0.3",
+    "@commonknowledge/common-themes": "^0.0.4",
     "@emotion/core": "10"
   },
   "devDependencies": {
